@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.1.1" />
   </ItemGroup>
 
@@ -37,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\F.Core.BaseRepository\F.Core.BaseRepository.csproj" />
+    <ProjectReference Include="..\F.Core.BaseRepository\F.Core.Repository.csproj" />
     <ProjectReference Include="..\F.Core.Common\F.Core.Common.csproj" />
     <ProjectReference Include="..\F.Core.IRepository\F.Core.IRepository.csproj" />
     <ProjectReference Include="..\F.Core.Model\F.Core.Model.csproj" />

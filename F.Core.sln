@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "F.Core.Common", "F.Core.Com
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "F.Core.Model", "F.Core.Model\F.Core.Model.csproj", "{2331378A-5E19-47CD-97CD-7DBD176E23E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F.Core.IRepository", "F.Core.IRepository\F.Core.IRepository.csproj", "{E2824AAD-B1E2-40CD-9102-FF64FBB32139}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "F.Core.IRepository", "F.Core.IRepository\F.Core.IRepository.csproj", "{E2824AAD-B1E2-40CD-9102-FF64FBB32139}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F.Core.BaseRepository", "F.Core.BaseRepository\F.Core.BaseRepository.csproj", "{44D47059-69F3-45CC-93D2-23797E676370}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "F.Core.Repository", "F.Core.BaseRepository\F.Core.Repository.csproj", "{44D47059-69F3-45CC-93D2-23797E676370}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
