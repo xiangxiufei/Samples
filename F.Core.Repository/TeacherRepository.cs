@@ -1,7 +1,7 @@
 ﻿using F.Core.IRepository;
 using F.Core.Model;
 
-namespace F.Core.BaseRepository
+namespace F.Core.Repository
 {
     public class TeacherRepository : BaseRepository<Teacher>, ITeacherRepository
     {

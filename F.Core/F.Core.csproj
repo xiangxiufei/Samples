@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\F.Core.BaseRepository\F.Core.Repository.csproj" />
+    <ProjectReference Include="..\F.Core.Repository\F.Core.Repository.csproj" />
     <ProjectReference Include="..\F.Core.Common\F.Core.Common.csproj" />
     <ProjectReference Include="..\F.Core.IRepository\F.Core.IRepository.csproj" />
     <ProjectReference Include="..\F.Core.Model\F.Core.Model.csproj" />

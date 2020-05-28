@@ -1,4 +1,4 @@
-using F.Core.BaseRepository;
+using F.Core.Repository;
 using F.Core.IRepository;
 using F.Core.Model;
 using Microsoft.AspNetCore.Builder;

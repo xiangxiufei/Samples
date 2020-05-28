@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace F.Core.BaseRepository
+namespace F.Core.Repository
 {
     public class BaseRepository<T> where T : class, new()
     {
