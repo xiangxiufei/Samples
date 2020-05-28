@@ -1,5 +1,4 @@
-using F.Core.Repository;
-using F.Core.IRepository;
+using Autofac;
 using F.Core.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
+using System.Reflection;
 
 namespace F.Core
 {
@@ -40,8 +40,23 @@ namespace F.Core
             });
 
             services.AddDbContext<MySqlContext>(options => options.UseMySQL(Configuration["ConnectionStrings:MySql"]));
-            services.AddScoped<IStudentRepository, StudentRepository>();
-            services.AddScoped<ITeacherRepository, TeacherRepository>();
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            var basePath = AppContext.BaseDirectory;
+            var service = Path.Combine(basePath, "F.Core.Service.dll");
+            var repository = Path.Combine(basePath, "F.Core.Repository.dll");
+
+            var assemblysServices = Assembly.LoadFrom(service);
+            builder.RegisterAssemblyTypes(assemblysServices)
+                      .AsImplementedInterfaces()
+                      .InstancePerDependency();
+
+            var assemblysRepository = Assembly.LoadFrom(repository);
+            builder.RegisterAssemblyTypes(assemblysRepository)
+                   .AsImplementedInterfaces()
+                   .InstancePerDependency();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

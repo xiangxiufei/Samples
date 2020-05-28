@@ -2,15 +2,15 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace F.Core.IRepository
+namespace F.Core.IService
 {
-    public interface IBaseRepository<T> where T : class, new()
+    public interface IBaseService<T> where T : class, new()
     {
-        T Add(T model);
+        T Add(T t);
 
-        bool Delete(T model);
+        bool Delete(T t);
 
-        bool Update(T model);
+        bool Update(T t);
 
         IQueryable<T> Select(Expression<Func<T, bool>> whereLambda);
 

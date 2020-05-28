@@ -62,10 +62,5 @@ namespace F.Core.Repository
                 return temp;
             }
         }
-
-        public int SaveChanges()
-        {
-            return mySqlContext.SaveChanges();
-        }
     }
 }

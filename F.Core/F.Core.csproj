@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -14,13 +14,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="wwwroot\school.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <ProjectReference Include="..\F.Core.Common\F.Core.Common.csproj" />
+    <ProjectReference Include="..\F.Core.IRepository\F.Core.IRepository.csproj" />
+    <ProjectReference Include="..\F.Core.IService\F.Core.IService.csproj" />
+    <ProjectReference Include="..\F.Core.Model\F.Core.Model.csproj" />
+    <ProjectReference Include="..\F.Core.Repository\F.Core.Repository.csproj" />
+    <ProjectReference Include="..\F.Core.Service\F.Core.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,10 +41,5 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\F.Core.Repository\F.Core.Repository.csproj" />
-    <ProjectReference Include="..\F.Core.Common\F.Core.Common.csproj" />
-    <ProjectReference Include="..\F.Core.IRepository\F.Core.IRepository.csproj" />
-    <ProjectReference Include="..\F.Core.Model\F.Core.Model.csproj" />
-  </ItemGroup>
+
 </Project>

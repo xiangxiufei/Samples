@@ -1,9 +1,8 @@
 ﻿using F.Core.Common;
-using F.Core.IRepository;
+using F.Core.IService;
 using F.Core.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Threading.Tasks;
 
 namespace F.Core.Controllers
 {
@@ -11,13 +10,11 @@ namespace F.Core.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        private readonly IStudentRepository studentRepository;
-        private readonly ITeacherRepository teacherRepository;
+        private readonly IStudentService studentService;
 
-        public StudentController(IStudentRepository studentRepository, ITeacherRepository teacherRepository)
+        public StudentController(IStudentService studentService)
         {
-            this.studentRepository = studentRepository;
-            this.teacherRepository = teacherRepository;
+            this.studentService = studentService;
         }
 
         [HttpPost]
@@ -25,14 +22,9 @@ namespace F.Core.Controllers
         {
             try
             {
-                studentRepository.Add(student);
+                Teacher teacher = new Teacher() { Tid = student.Sid, Tname = student.Sname };
 
-                Teacher teacher = new Teacher() { Tid = 1, Tname = "苍老师" };
-
-                teacherRepository.Add(teacher);
-
-                studentRepository.SaveChanges();
-                //teacherRepository.SaveChanges();
+                studentService.InsertStudentAndTeacher(student, teacher);
 
                 return new Response().ToJson();
             }
@@ -47,7 +39,7 @@ namespace F.Core.Controllers
         {
             try
             {
-                var students = studentRepository.Select(t => true);
+                var students = studentService.Select(t => true);
                 return students.ToJson();
             }
             catch (Exception e)

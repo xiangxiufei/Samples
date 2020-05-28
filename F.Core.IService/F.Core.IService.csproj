@@ -11,4 +11,5 @@
   <ItemGroup>
     <ProjectReference Include="..\F.Core.Model\F.Core.Model.csproj" />
   </ItemGroup>
+
 </Project>
