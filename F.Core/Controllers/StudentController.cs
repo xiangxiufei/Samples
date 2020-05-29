@@ -22,7 +22,7 @@ namespace F.Core.Controllers
         {
             try
             {
-                Teacher teacher = new Teacher() { Tid = student.Sid, Tname = student.Sname };
+                Teacher teacher = new Teacher() { Tid = 1, Tname = student.Sname };
 
                 studentService.InsertStudentAndTeacher(student, teacher);
 

@@ -1,9 +1,10 @@
 ﻿using F.Core.IRepository;
+using F.Core.IService;
 using F.Core.Model;
 
 namespace F.Core.Service
 {
-    public class TeacherService : BaseService<Teacher>, ITeacherRepository
+    public class TeacherService : BaseService<Teacher>, ITeacherService
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly ITeacherRepository teacherRepository;
@@ -12,6 +13,7 @@ namespace F.Core.Service
         {
             this.unitOfWork = unitOfWork;
             base.currentRepository = teacherRepository;
+            this.teacherRepository = teacherRepository;
         }
     }
 }

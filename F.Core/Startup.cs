@@ -1,5 +1,9 @@
 using Autofac;
+using F.Core.IRepository;
+using F.Core.IService;
 using F.Core.Model;
+using F.Core.Repository;
+using F.Core.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +36,7 @@ namespace F.Core
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "V1",
-                    Title = ".NetCore 3.1 EntityFrameworkCore",
+                    Title = "F.Core",
                 });
 
                 c.IncludeXmlComments(Path.Combine(basePath, "Core.xml"), true);
@@ -40,6 +44,12 @@ namespace F.Core
             });
 
             services.AddDbContext<MySqlContext>(options => options.UseMySQL(Configuration["ConnectionStrings:MySql"]));
+
+            //services.AddScoped<IStudentRepository, StudentRepository>();
+            //services.AddScoped<ITeacherRepository, TeacherRepository>();
+            //services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //services.AddScoped<IStudentService, StudentService>();
+            //services.AddScoped<ITeacherService, TeacherService>();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -48,13 +58,11 @@ namespace F.Core
             var service = Path.Combine(basePath, "F.Core.Service.dll");
             var repository = Path.Combine(basePath, "F.Core.Repository.dll");
 
-            var assemblysServices = Assembly.LoadFrom(service);
-            builder.RegisterAssemblyTypes(assemblysServices)
+            builder.RegisterAssemblyTypes(Assembly.LoadFrom(service))
                       .AsImplementedInterfaces()
                       .InstancePerDependency();
 
-            var assemblysRepository = Assembly.LoadFrom(repository);
-            builder.RegisterAssemblyTypes(assemblysRepository)
+            builder.RegisterAssemblyTypes(Assembly.LoadFrom(repository))
                    .AsImplementedInterfaces()
                    .InstancePerDependency();
         }
@@ -69,7 +77,7 @@ namespace F.Core
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", ".NetCore 3.1 EntityFrameworkCore API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "F.Core API V1");
                 c.RoutePrefix = "";
             });
 
