@@ -6,22 +6,19 @@ namespace F.Core.Service
 {
     public class StudentService : BaseService<Student>, IStudentService
     {
-        private readonly IUnitOfWork unitOfWork;
         private readonly ITeacherRepository teacherRepository;
-        private readonly IStudentRepository studentRepository;
 
-        public StudentService(IUnitOfWork unitOfWork, IStudentRepository studentRepository, ITeacherRepository teacherRepository)
+        public StudentService(IUnitOfWork unitOfWork, IBaseRepository<Student> currentRepository, ITeacherRepository teacherRepository) : base(unitOfWork, currentRepository)
+
         {
-            this.unitOfWork = unitOfWork;
-            base.currentRepository = studentRepository;
             this.teacherRepository = teacherRepository;
-            this.studentRepository = studentRepository;
         }
 
-        public bool InsertStudentAndTeacher(Student student, Teacher teacher)
+        public bool UOW(Student student, Teacher teacher)
         {
             currentRepository.Add(student);
             teacherRepository.Add(teacher);
+
             unitOfWork.SaveChanges();
 
             return true;

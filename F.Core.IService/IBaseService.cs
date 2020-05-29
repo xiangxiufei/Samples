@@ -6,7 +6,7 @@ namespace F.Core.IService
 {
     public interface IBaseService<T> where T : class, new()
     {
-        T Add(T t);
+        bool Add(T t);
 
         bool Delete(T t);
 

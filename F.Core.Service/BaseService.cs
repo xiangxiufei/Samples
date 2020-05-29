@@ -5,23 +5,33 @@ using System.Linq.Expressions;
 
 namespace F.Core.Service
 {
-    public abstract class BaseService<T> where T : class, new()
+    public class BaseService<T> where T : class, new()
     {
-        public IBaseRepository<T> currentRepository;
+        protected IUnitOfWork unitOfWork;
+        protected IBaseRepository<T> currentRepository;
 
-        public T Add(T t)
+        public BaseService(IUnitOfWork unitOfWork, IBaseRepository<T> currentRepository)
         {
-            return currentRepository.Add(t);
+            this.unitOfWork = unitOfWork;
+            this.currentRepository = currentRepository;
+        }
+
+        public bool Add(T t)
+        {
+            currentRepository.Add(t);
+            return unitOfWork.SaveChanges() > 0;
         }
 
         public bool Delete(T t)
         {
-            return currentRepository.Delete(t);
+            currentRepository.Delete(t);
+            return unitOfWork.SaveChanges() > 0;
         }
 
         public bool Update(T t)
         {
-            return currentRepository.Update(t);
+            currentRepository.Update(t);
+            return unitOfWork.SaveChanges() > 0;
         }
 
         public IQueryable<T> Select(Expression<Func<T, bool>> whereLambda)

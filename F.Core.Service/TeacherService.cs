@@ -6,14 +6,8 @@ namespace F.Core.Service
 {
     public class TeacherService : BaseService<Teacher>, ITeacherService
     {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly ITeacherRepository teacherRepository;
-
-        public TeacherService(IUnitOfWork unitOfWork, ITeacherRepository teacherRepository)
+        public TeacherService(IUnitOfWork unitOfWork, IBaseRepository<Teacher> currentRepository) : base(unitOfWork, currentRepository)
         {
-            this.unitOfWork = unitOfWork;
-            base.currentRepository = teacherRepository;
-            this.teacherRepository = teacherRepository;
         }
     }
 }
