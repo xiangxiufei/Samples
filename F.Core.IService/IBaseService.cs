@@ -1,19 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace F.Core.IService
 {
     public interface IBaseService<T> where T : class, new()
     {
-        bool Add(T t);
+        Task<int> Insert(T entity);
 
-        bool Delete(T t);
+        Task<int> Insert(List<T> entities);
 
-        bool Update(T t);
+        Task<int> Update(T entity);
 
-        IQueryable<T> Select(Expression<Func<T, bool>> whereLambda);
+        Task<int> Update(List<T> entities);
 
-        IQueryable<T> Select<S>(int pageSize, int pageIndex, out int total, Expression<Func<T, bool>> whereLambda, Expression<Func<T, S>> orderByLambda, bool isAsc);
+        Task<int> Delete(T entity);
+
+        Task<int> Delete(List<T> entities);
+
+        Task<List<T>> Select();
+
+        Task<List<T>> Select(Expression<Func<T, bool>> whereLambda);
+
+        Task<Tuple<List<T>, int>> Select<S>(int pageSize, int pageIndex, Expression<Func<T, bool>> whereLambda, Expression<Func<T, S>> orderByLambda, bool isAsc);
     }
 }

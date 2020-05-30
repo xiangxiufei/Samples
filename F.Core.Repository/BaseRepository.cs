@@ -1,8 +1,10 @@
 ﻿using F.Core.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace F.Core.Repository
 {
@@ -15,51 +17,67 @@ namespace F.Core.Repository
             this.mySqlContext = mySqlContext;
         }
 
-        public T Add(T model)
+        public void Insert(T entity)
         {
-            mySqlContext.Set<T>().Add(model);
-            return model;
+            mySqlContext.Set<T>().Add(entity);
         }
 
-        public bool Delete(T model)
+        public void Insert(List<T> entities)
         {
-            mySqlContext.Entry(model).State = EntityState.Deleted;
-            return true;
+            mySqlContext.Set<T>().AddRange(entities);
         }
 
-        public bool Update(T model)
+        public void Update(T entity)
         {
-            mySqlContext.Set<T>().Attach(model);
-            mySqlContext.Entry(model).State = EntityState.Modified;
-            return true;
+            mySqlContext.Set<T>().Update(entity);
         }
 
-        public IQueryable<T> Select(Expression<Func<T, bool>> whereLambda)
+        public void Update(List<T> entities)
         {
-            return mySqlContext.Set<T>().Where(whereLambda).AsQueryable();
+            mySqlContext.Set<T>().UpdateRange(entities);
         }
 
-        public IQueryable<T> Select<S>(int pageSize, int pageIndex,
-            out int total, Expression<Func<T, bool>> whereLambda,
-            Expression<Func<T, S>> orderByLambda, bool isAsc)
+        public void Delete(T entity)
         {
-            total = mySqlContext.Set<T>().Where(whereLambda).Count();
+            mySqlContext.Set<T>().Remove(entity);
+        }
+
+        public void Delete(List<T> entities)
+        {
+            mySqlContext.Set<T>().RemoveRange(entities);
+        }
+
+        public async Task<List<T>> Select()
+        {
+            return await mySqlContext.Set<T>().ToListAsync();
+        }
+
+        public async Task<List<T>> Select(Expression<Func<T, bool>> whereLambda)
+        {
+            return await mySqlContext.Set<T>().Where(whereLambda).ToListAsync();
+        }
+
+        public async Task<Tuple<List<T>, int>> Select<S>(int pageSize, int pageIndex, Expression<Func<T, bool>> whereLambda, Expression<Func<T, S>> orderByLambda, bool isAsc)
+        {
+            var total = await mySqlContext.Set<T>().Where(whereLambda).CountAsync();
 
             if (isAsc)
             {
-                var temp = mySqlContext.Set<T>().Where(whereLambda)
+                var entities = await mySqlContext.Set<T>().Where(whereLambda)
                                       .OrderBy<T, S>(orderByLambda)
                                       .Skip(pageSize * (pageIndex - 1))
-                                      .Take(pageSize).AsQueryable();
-                return temp;
+                                      .Take(pageSize).ToListAsync();
+
+                return new Tuple<List<T>, int>(entities, total);
             }
             else
             {
-                var temp = mySqlContext.Set<T>().Where(whereLambda)
+                var entities = await mySqlContext.Set<T>().Where(whereLambda)
                                       .OrderByDescending<T, S>(orderByLambda)
                                       .Skip(pageSize * (pageIndex - 1))
-                                      .Take(pageSize).AsQueryable();
-                return temp;
+                                      .Take(pageSize).ToListAsync();
+
+                return new Tuple<List<T>, int>(entities, total);
             }
         }
     }

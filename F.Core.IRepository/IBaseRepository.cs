@@ -1,19 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace F.Core.IRepository
 {
     public interface IBaseRepository<T> where T : class, new()
     {
-        T Add(T model);
+        void Insert(T entity);
 
-        bool Delete(T model);
+        void Insert(List<T> entities);
 
-        bool Update(T model);
+        void Update(T entity);
 
-        IQueryable<T> Select(Expression<Func<T, bool>> whereLambda);
+        void Update(List<T> entities);
 
-        IQueryable<T> Select<S>(int pageSize, int pageIndex, out int total, Expression<Func<T, bool>> whereLambda, Expression<Func<T, S>> orderByLambda, bool isAsc);
+        void Delete(T entity);
+
+        void Delete(List<T> entities);
+
+        Task<List<T>> Select();
+
+        Task<List<T>> Select(Expression<Func<T, bool>> whereLambda);
+
+        Task<Tuple<List<T>, int>> Select<S>(int pageSize, int pageIndex, Expression<Func<T, bool>> whereLambda, Expression<Func<T, S>> orderByLambda, bool isAsc);
     }
 }

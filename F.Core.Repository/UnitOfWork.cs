@@ -1,6 +1,7 @@
 ﻿using F.Core.IRepository;
 using F.Core.Model;
 using System;
+using System.Threading.Tasks;
 
 namespace F.Core.Repository
 {
@@ -18,9 +19,9 @@ namespace F.Core.Repository
             return mySqlContext;
         }
 
-        public int SaveChanges()
+        public async Task<int> SaveChangesAsync()
         {
-            return mySqlContext.SaveChanges();
+            return await mySqlContext.SaveChangesAsync();
         }
     }
 }

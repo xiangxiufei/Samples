@@ -3,6 +3,7 @@ using F.Core.IService;
 using F.Core.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace F.Core.Controllers
 {
@@ -18,11 +19,11 @@ namespace F.Core.Controllers
         }
 
         [HttpPost]
-        public string Insert(Student student)
+        public async Task<string> Insert(Student student)
         {
             try
             {
-                studentService.Add(student);
+                await studentService.Insert(student);
 
                 return new Response().ToJson();
             }
@@ -36,13 +37,13 @@ namespace F.Core.Controllers
         /// 工作单元--多表操作,一次提交,commit/rollback
         /// </summary>
         [HttpPost]
-        public string UOW(Student student)
+        public async Task<string> UOW(Student student)
         {
             try
             {
                 Teacher teacher = new Teacher() { Tid = 1, Tname = student.Sname };
 
-                studentService.UOW(student, teacher);
+                await studentService.UOW(student, teacher);
 
                 return new Response().ToJson();
             }
@@ -53,11 +54,11 @@ namespace F.Core.Controllers
         }
 
         [HttpGet]
-        public string GetEntities()
+        public async Task<string> GetEntities()
         {
             try
             {
-                var students = studentService.Select(t => true);
+                var students = await studentService.Select(t => true);
                 return students.ToJson();
             }
             catch (Exception e)

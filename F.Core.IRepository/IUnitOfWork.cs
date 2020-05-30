@@ -1,4 +1,5 @@
 ﻿using F.Core.Model;
+using System.Threading.Tasks;
 
 namespace F.Core.IRepository
 {
@@ -6,6 +7,6 @@ namespace F.Core.IRepository
     {
         MySqlContext GetMySqlContext();
 
-        int SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }

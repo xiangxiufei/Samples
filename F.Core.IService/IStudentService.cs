@@ -1,9 +1,10 @@
 ﻿using F.Core.Model;
+using System.Threading.Tasks;
 
 namespace F.Core.IService
 {
     public interface IStudentService : IBaseService<Student>
     {
-        bool UOW(Student student, Teacher teacher);
+        Task<bool> UOW(Student student, Teacher teacher);
     }
 }

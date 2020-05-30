@@ -1,6 +1,7 @@
 ﻿using F.Core.IRepository;
 using F.Core.IService;
 using F.Core.Model;
+using System.Threading.Tasks;
 
 namespace F.Core.Service
 {
@@ -14,12 +15,12 @@ namespace F.Core.Service
             this.teacherRepository = teacherRepository;
         }
 
-        public bool UOW(Student student, Teacher teacher)
+        public async Task<bool> UOW(Student student, Teacher teacher)
         {
-            currentRepository.Add(student);
-            teacherRepository.Add(teacher);
+            currentRepository.Insert(student);
+            teacherRepository.Insert(teacher);
 
-            unitOfWork.SaveChanges();
+            await unitOfWork.SaveChangesAsync();
 
             return true;
         }
