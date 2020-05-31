@@ -44,12 +44,6 @@ namespace F.Core
             });
 
             services.AddDbContext<MySqlContext>(options => options.UseMySQL(Configuration["ConnectionStrings:MySql"]));
-
-            //services.AddScoped<IStudentRepository, StudentRepository>();
-            //services.AddScoped<ITeacherRepository, TeacherRepository>();
-            //services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //services.AddScoped<IStudentService, StudentService>();
-            //services.AddScoped<ITeacherService, TeacherService>();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -69,6 +63,14 @@ namespace F.Core
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(options =>
+            {
+                options.WithOrigins("http://127.0.0.1:5500");
+                options.AllowAnyHeader();
+                options.AllowAnyMethod();
+                options.AllowCredentials();
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
