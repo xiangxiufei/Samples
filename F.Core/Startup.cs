@@ -1,9 +1,5 @@
 using Autofac;
-using F.Core.IRepository;
-using F.Core.IService;
 using F.Core.Model;
-using F.Core.Repository;
-using F.Core.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
