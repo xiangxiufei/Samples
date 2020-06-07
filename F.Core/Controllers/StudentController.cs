@@ -50,11 +50,11 @@ namespace F.Core.Controllers
         }
 
         [HttpPost]
-        public async Task<string> Delete([FromForm] Student student)
+        public async Task<string> Delete(int id)
         {
             try
             {
-                await studentService.Delete(t => t.Sid == student.Sid);
+                await studentService.Delete(t => t.Sid == id);
 
                 return new Response().ToJson();
             }
@@ -79,11 +79,11 @@ namespace F.Core.Controllers
         }
 
         [HttpPost]
-        public async Task<string> UOW(Student student)
+        public async Task<string> UOW([FromForm] Student student)
         {
             try
             {
-                Teacher teacher = new Teacher() { Tid = 1, Tname = student.Sname };
+                Teacher teacher = new Teacher() { Tid = student.Sid, Tname = student.Sname };
 
                 await studentService.UOW(student, teacher);
 

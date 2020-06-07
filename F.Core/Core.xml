@@ -4,10 +4,5 @@
         <name>F.Core</name>
     </assembly>
     <members>
-        <member name="M:F.Core.Controllers.StudentController.UOW(F.Core.Model.Student)">
-            <summary>
-            工作单元--多表操作,一次提交,commit/rollback
-            </summary>
-        </member>
     </members>
 </doc>
