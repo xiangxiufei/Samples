@@ -17,8 +17,8 @@ namespace F.Core.Service
 
         public async Task<bool> UOW(Student student, Teacher teacher)
         {
-            currentRepository.Insert(student);
-            teacherRepository.Insert(teacher);
+            await currentRepository.Insert(student);
+            await teacherRepository.Insert(teacher);
 
             await unitOfWork.SaveChangesAsync();
 

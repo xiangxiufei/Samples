@@ -5,7 +5,7 @@ namespace F.Core.IRepository
 {
     public interface IUnitOfWork
     {
-        MySqlContext GetMySqlContext();
+        MyDbContext GetDbSqlContext();
 
         Task<int> SaveChangesAsync();
     }

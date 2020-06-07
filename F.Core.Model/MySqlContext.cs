@@ -2,13 +2,13 @@
 
 namespace F.Core.Model
 {
-    public partial class MySqlContext : DbContext
+    public partial class MyDbContext : DbContext
     {
-        public MySqlContext()
+        public MyDbContext()
         {
         }
 
-        public MySqlContext(DbContextOptions<MySqlContext> options)
+        public MyDbContext(DbContextOptions<MyDbContext> options)
             : base(options)
         {
         }

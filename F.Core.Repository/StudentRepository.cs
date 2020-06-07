@@ -5,7 +5,7 @@ namespace F.Core.Repository
 {
     public class StudentRepository : BaseRepository<Student>, IStudentRepository
     {
-        public StudentRepository(MySqlContext mySqlContext) : base(mySqlContext)
+        public StudentRepository(MyDbContext myDbContext) : base(myDbContext)
         {
         }
     }

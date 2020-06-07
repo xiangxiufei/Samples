@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -10,15 +10,15 @@ namespace F.Core.IService
     {
         Task<int> Insert(T entity);
 
-        Task<int> Insert(List<T> entities);
-
         Task<int> Update(T entity);
 
-        Task<int> Update(List<T> entities);
+        Task<int> Update(Expression<Func<T, bool>> whereLambda, Expression<Func<T, T>> entity);
 
-        Task<int> Delete(T entity);
+        Task<int> Delete(Expression<Func<T, bool>> whereLambda);
 
-        Task<int> Delete(List<T> entities);
+        Task<bool> IsExist(Expression<Func<T, bool>> whereLambda);
+
+        Task<T> GetEntity(Expression<Func<T, bool>> whereLambda);
 
         Task<List<T>> Select();
 

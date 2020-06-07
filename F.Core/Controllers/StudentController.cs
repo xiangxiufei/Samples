@@ -2,7 +2,6 @@
 using F.Core.IService;
 using F.Core.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Expressions;
 using System;
 using System.Threading.Tasks;
 
@@ -39,7 +38,8 @@ namespace F.Core.Controllers
         {
             try
             {
-                await studentService.Update(student);
+                //await studentService.Update(student);
+                await studentService.Update(t => t.Sid == student.Sid, t => new Student() { Sage = student.Sage });
 
                 return new Response().ToJson();
             }
@@ -54,7 +54,7 @@ namespace F.Core.Controllers
         {
             try
             {
-                await studentService.Delete(student);
+                await studentService.Delete(t => t.Sid == student.Sid);
 
                 return new Response().ToJson();
             }
@@ -78,9 +78,6 @@ namespace F.Core.Controllers
             }
         }
 
-        /// <summary>
-        /// 工作单元--多表操作,一次提交,commit/rollback
-        /// </summary>
         [HttpPost]
         public async Task<string> UOW(Student student)
         {

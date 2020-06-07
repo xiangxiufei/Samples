@@ -39,7 +39,7 @@ namespace F.Core
                 c.IncludeXmlComments(Path.Combine(basePath, "Model.xml"), true);
             });
 
-            services.AddDbContext<MySqlContext>(options => options.UseMySQL(Configuration["ConnectionStrings:MySql"]));
+            services.AddDbContext<MyDbContext>(options => options.UseMySQL(Configuration["ConnectionStrings:MySql"]));
         }
 
         public void ConfigureContainer(ContainerBuilder builder)

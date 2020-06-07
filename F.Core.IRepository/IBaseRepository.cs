@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -8,17 +9,17 @@ namespace F.Core.IRepository
 {
     public interface IBaseRepository<T> where T : class, new()
     {
-        void Insert(T entity);
-
-        void Insert(List<T> entities);
+        ValueTask<EntityEntry<T>> Insert(T entity);
 
         void Update(T entity);
 
-        void Update(List<T> entities);
+        Task<int> Update(Expression<Func<T, bool>> whereLambda, Expression<Func<T, T>> entity);
 
-        void Delete(T entity);
+        Task<int> Delete(Expression<Func<T, bool>> whereLambda);
 
-        void Delete(List<T> entities);
+        Task<bool> IsExist(Expression<Func<T, bool>> whereLambda);
+
+        Task<T> GetEntity(Expression<Func<T, bool>> whereLambda);
 
         Task<List<T>> Select();
 

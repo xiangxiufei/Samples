@@ -7,21 +7,21 @@ namespace F.Core.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly MySqlContext mySqlContext;
+        private readonly MyDbContext myDbContext;
 
-        public UnitOfWork(MySqlContext mySqlContext)
+        public UnitOfWork(MyDbContext myDbContext)
         {
-            this.mySqlContext = mySqlContext ?? throw new ArgumentNullException(nameof(mySqlContext));
+            this.myDbContext = myDbContext;
         }
 
-        public MySqlContext GetMySqlContext()
+        public MyDbContext GetDbSqlContext()
         {
-            return mySqlContext;
+            return myDbContext;
         }
 
         public async Task<int> SaveChangesAsync()
         {
-            return await mySqlContext.SaveChangesAsync();
+            return await myDbContext.SaveChangesAsync();
         }
     }
 }

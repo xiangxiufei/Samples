@@ -1,4 +1,5 @@
 ﻿using F.Core.IRepository;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,13 +21,7 @@ namespace F.Core.Service
 
         public async Task<int> Insert(T entity)
         {
-            currentRepository.Insert(entity);
-            return await unitOfWork.SaveChangesAsync();
-        }
-
-        public async Task<int> Insert(List<T> entities)
-        {
-            currentRepository.Insert(entities);
+            await currentRepository.Insert(entity);
             return await unitOfWork.SaveChangesAsync();
         }
 
@@ -36,22 +31,26 @@ namespace F.Core.Service
             return await unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<int> Update(List<T> entities)
+        public async Task<int> Update(Expression<Func<T, bool>> whereLambda, Expression<Func<T, T>> entity)
         {
-            currentRepository.Update(entities);
+            await currentRepository.Update(whereLambda, entity);
             return await unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<int> Delete(T entity)
+        public async Task<int> Delete(Expression<Func<T, bool>> whereLambda)
         {
-            currentRepository.Delete(entity);
+            await currentRepository.Delete(whereLambda);
             return await unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<int> Delete(List<T> entities)
+        public async Task<bool> IsExist(Expression<Func<T, bool>> whereLambda)
         {
-            currentRepository.Delete(entities);
-            return await unitOfWork.SaveChangesAsync();
+            return await currentRepository.IsExist(whereLambda);
+        }
+
+        public async Task<T> GetEntity(Expression<Func<T, bool>> whereLambda)
+        {
+            return await currentRepository.GetEntity(whereLambda);
         }
 
         public async Task<List<T>> Select()
