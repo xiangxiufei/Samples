@@ -14,7 +14,7 @@ namespace F.Core.Repository
             this.myDbContext = myDbContext;
         }
 
-        public MyDbContext GetDbSqlContext()
+        public MyDbContext GetDbContext()
         {
             return myDbContext;
         }
