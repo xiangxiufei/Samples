@@ -79,6 +79,8 @@ namespace F.Core
                 c.RoutePrefix = "";
             });
 
+            app.UseStaticFiles();
+
             app.UseRouting();
 
             app.UseAuthorization();
