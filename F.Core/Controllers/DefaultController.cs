@@ -1,12 +1,9 @@
-﻿using System;
+﻿using F.Core.Common;
+using F.Core.Model;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using F.Core.Common;
-using F.Core.Model;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace F.Core.Controllers
 {
@@ -27,7 +24,7 @@ namespace F.Core.Controllers
                     FileInfo info = new FileInfo(file);
                     Pic pic = new Pic()
                     {
-                        img = "http://localhost:51917/images" + info.Name,
+                        img = "http://127.0.0.1:5000/images/" + info.Name,
                         url = "#"
                     };
 
