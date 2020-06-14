@@ -61,10 +61,10 @@ namespace F.Core
         {
             app.UseCors(options =>
             {
-                options.WithOrigins("http://localhost:5500", "http://127.0.0.1:5500", "http://localhost:5000", "http://127.0.0.1:5000");
-                options.AllowAnyHeader();
-                options.AllowAnyMethod();
-                options.AllowCredentials();
+                options.AllowAnyMethod()
+                       .SetIsOriginAllowed(_ => true)
+                       .AllowAnyHeader()
+                       .AllowCredentials();
             });
 
             if (env.IsDevelopment())

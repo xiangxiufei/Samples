@@ -4,5 +4,10 @@
         <name>F.Core</name>
     </assembly>
     <members>
+        <member name="T:F.Core.Controllers.DefaultController">
+            <summary>
+            简单配置下接口,主要为了学习vue
+            </summary>
+        </member>
     </members>
 </doc>
