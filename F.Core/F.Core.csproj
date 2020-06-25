@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\DefaultController.cs" />
     <Compile Remove="Controllers\TeacherController.cs" />
   </ItemGroup>
 
