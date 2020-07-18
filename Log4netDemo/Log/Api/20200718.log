@@ -1,0 +1,24 @@
+【记录时间】2020-07-18 22:40:10,795                     
+【详细内容】URL：localhost:59961/api/Student/1 
+ Method：GET 
+ ActionArguments：{"id":1}
+ Response：{"status":200,"msg":"操作成功！","data":[{"Id":1,"Name":"张三","Age":25,"Sex":"男"}]}
+                      
+【记录时间】2020-07-18 22:40:45,619                     
+【详细内容】URL：localhost:59961/api/Student 
+ Method：POST 
+ ActionArguments：{"student":{"id":4,"name":"马六","age":22,"sex":"男"}}
+ Response：{"status":200,"msg":"操作成功！","data":null}                   
+
+【记录时间】2020-07-18 22:41:36,421                     
+【详细内容】URL：localhost:59961/api/Student/2 
+ Method：PUT 
+ ActionArguments：{"id":2,"student":{"id":2,"name":"李四","age":30,"sex":"男"}}
+ Response：{"status":200,"msg":"操作成功！","data":null}                   
+
+【记录时间】2020-07-18 22:41:49,284                     
+【详细内容】URL：localhost:59961/api/Student/3 
+ Method：DELETE 
+ ActionArguments：{"id":3}
+ Response：{"status":200,"msg":"操作成功！","data":null}
+                      
