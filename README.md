@@ -1,1 +1,5 @@
-## .net core 3.1 + swagger + autofac + ef core  + 仓储模式 +工作单元
+# .Net Core Samples
+
+## 1. RepositoryDemo
+
+.net core 3.1 + swagger + autofac + ef core + 仓储模式 +工作单元
