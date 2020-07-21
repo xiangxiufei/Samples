@@ -39,7 +39,7 @@ namespace Core.Controllers
                 }
                 else
                 {
-                    response.Status = 500;
+                    response.Status = 400;
                     response.Msg = "用户密码不正确！";
                 }
             }
